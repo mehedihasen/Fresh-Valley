@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 const port = 5000
 const pass = "gpPHCdE1BLinfKHS"
-const uri = "mongodb+srv://electrical:gpPHCdE1BLinfKHS@cluster0.h8zf7.mongodb.net/electrical?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.h8zf7.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express()
