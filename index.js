@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 const port = 5000
 const pass = "gpPHCdE1BLinfKHS"
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PSS}@cluster0.h8zf7.${process.env.DB_NAME}.net/electrical?retryWrites=true&w=majority`;
+const uri = "mongodb+srv://electrical:gpPHCdE1BLinfKHS@cluster0.h8zf7.mongodb.net/electrical?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express()
@@ -19,6 +19,7 @@ client.connect(err => {
   const orderCollection = client.db("electrical").collection("order");
   const ReviewCollection = client.db("electrical").collection("Review");
   const adminCollection = client.db("electrical").collection("admin");
+  console.log(err);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
