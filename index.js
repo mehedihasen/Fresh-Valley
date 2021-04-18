@@ -18,6 +18,7 @@ client.connect(err => {
   const collection = client.db("electrical").collection("service");
   const orderCollection = client.db("electrical").collection("order");
   const ReviewCollection = client.db("electrical").collection("Review");
+  const adminCollection = client.db("electrical").collection("admin");
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -25,6 +26,13 @@ app.get('/', (req, res) => {
 
 app.get("/product", (req, res)=>{
   collection.find()
+  .toArray((err, item)=>{
+    res.send(item)
+  })
+})
+
+app.get("/admin", (req, res)=>{
+  adminCollection.find()
   .toArray((err, item)=>{
     res.send(item)
   })
@@ -67,6 +75,15 @@ orderCollection.insertOne(product)
 app.post("/review",(req, res)=>{
   const product = req.body;
 ReviewCollection.insertOne(product)
+  .then((result, err)=>{
+    res.send(result.insertedCount > 0)
+    console.log(result);
+    
+  })
+})
+app.post("/addmin",(req, res)=>{
+  const product = req.body;
+adminCollection.insertOne(product)
   .then((result, err)=>{
     res.send(result.insertedCount > 0)
     console.log(result);
