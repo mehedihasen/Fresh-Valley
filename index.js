@@ -1,5 +1,6 @@
 const express = require('express')
 const cors =require('cors')
+const ObjectId =require('mongodb').ObjectID
 const MongoClient = require('mongodb').MongoClient;
 
 const port = 5000
@@ -90,6 +91,21 @@ adminCollection.insertOne(product)
     console.log(result);
     
   })
+})
+
+
+
+
+
+app.delete('/delete/:id', (req, res) => {
+  console.log(req.params.id);
+  collection.deleteOne({_id: ObjectId(req.params.id)})
+  .then((result)=>{
+    res.send(result.deletedCount > 0)
+  //  console.log(result);
+
+  })
+
 })
 
   // client.close();
